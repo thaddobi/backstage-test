@@ -5,6 +5,9 @@ app:
 organization:
   name: My Company
 
+openai:
+  apiKey: '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'
+
 backend:
   # Used for enabling authentication, secret is shared by all backend plugins
   # See https://backstage.io/docs/auth/service-to-service-auth for
@@ -50,7 +53,14 @@ proxy:
   #   '/test':
   #     target: 'https://example.com'
   #     changeOrigin: true
+  '/sentry/api':
+      target: https://sentry.io/api/
+      allowedMethods: ['GET']
+      headers:
+        Authorization: Bearer ${SENTRY_TOKEN}
 
+sentry:
+  organization: <your-organization>
 # Reference documentation http://backstage.io/docs/features/techdocs/configuration
 # Note: After experimenting with basic setup, use CI/CD to generate docs
 # and an external cloud storage when deploying TechDocs for production use-case.

@@ -27,6 +27,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import { MyGroupsSidebarItem } from '@backstage/plugin-org';
 import GroupIcon from '@material-ui/icons/People';
+import InternalToolIcon from './internal-tool.icon.svg';
 
 const useSidebarLogoStyles = makeStyles({
   root: {
@@ -89,7 +90,7 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         to="/settings"
       >
         <SidebarSettings />
-      </SidebarGroup>
+      </SidebarGroup>  
     </Sidebar>
     {children}
   </SidebarPage>

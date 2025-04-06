@@ -53,6 +53,8 @@ import {
 
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
+import { EntitySentryContent } from '@backstage-community/plugin-sentry';
+import { EntitySentryCard } from '@backstage-community/plugin-sentry';
 
 import {
   EntityKubernetesContent,
@@ -151,6 +153,9 @@ const overviewContent = (
     <Grid item md={8} xs={12}>
       <EntityHasSubcomponentsCard variant="gridItem" />
     </Grid>
+    <Grid item xs={12} sm={6} md={4}>
+      <EntitySentryCard />
+    </Grid>
   </Grid>
 );
 
@@ -196,6 +201,10 @@ const serviceEntityPage = (
 
     <EntityLayout.Route path="/docs" title="Docs">
       {techdocsContent}
+    </EntityLayout.Route>
+
+    <EntityLayout.Route path="/sentry" title="Sentry">
+      <EntitySentryContent />
     </EntityLayout.Route>
   </EntityLayout>
 );
