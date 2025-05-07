@@ -6,7 +6,7 @@ organization:
   name: My Company
 
 openai:
-  apiKey: ''
+  # apiKey: ''
 
 backend:
   # Used for enabling authentication, secret is shared by all backend plugins
