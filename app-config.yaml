@@ -6,7 +6,7 @@ organization:
   name: My Company
 
 openai:
-  apiKey: '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'
+  apiKey: ''
 
 backend:
   # Used for enabling authentication, secret is shared by all backend plugins
@@ -40,7 +40,7 @@ integrations:
     - host: github.com
       # This is a Personal Access Token or PAT from GitHub. You can find out how to generate this token, and more information
       # about setting up the GitHub integration here: https://backstage.io/docs/integrations/github/locations#configuration
-      token: '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'
+      token: ''
     ### Example for how to add your GitHub Enterprise instance using the API:
     # - host: ghe.example.net
     #   apiBaseUrl: https://ghe.example.net/api/v3
