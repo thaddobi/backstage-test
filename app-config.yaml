@@ -6,7 +6,7 @@ organization:
   name: My Company
 
 openai:
-  # apiKey: ''
+
 
 backend:
   # Used for enabling authentication, secret is shared by all backend plugins
@@ -31,8 +31,7 @@ backend:
   # This is for local development only, it is not recommended to use this in production
   # The production database configuration is stored in app-config.production.yaml
   database:
-    client: better-sqlite3
-    connection: ':memory:'
+
   # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
 integrations:
@@ -57,7 +56,7 @@ proxy:
       target: https://sentry.io/api/
       allowedMethods: ['GET']
       headers:
-        Authorization: Bearer ${SENTRY_TOKEN}
+
 
 sentry:
   organization: <your-organization>
