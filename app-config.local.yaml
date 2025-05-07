@@ -1,0 +1,25 @@
+# Backstage override configuration for your local development environment
+# github app secret: 
+# github app client Id: 
+
+auth:
+  environment: development
+  providers:
+    guest: {}
+    github:
+      development:
+        clientId: ''
+        clientSecret: ''
+        ## uncomment if using GitHub Enterprise
+        # enterpriseInstanceUrl: ${AUTH_GITHUB_ENTERPRISE_INSTANCE_URL}
+        ## uncomment to set lifespan of user session
+        # sessionDuration: { hours: 24 } # supports `ms` library format (e.g. '24h', '2 days'), ISO duration, "human duration" as used in code
+        # signIn:
+        #   resolvers:
+        #     # See https://backstage.io/docs/auth/github/provider#resolvers for more resolvers
+        #     - resolver: usernameMatchingUserEntityName
+integrations:
+  github:
+    - host: github.com
+      token: 
+      #we can also integrate gitlab, bitbucket, jira here with host, token as above
