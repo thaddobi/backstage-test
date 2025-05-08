@@ -6,5 +6,6 @@ metadata:
     github.com/project-slug: thaddobi/backstage-test
 spec:
   type: other
-  lifecycle: unknown
+  lifecycle: experimental
+  description: A backstage test app
   owner: thaddobi
