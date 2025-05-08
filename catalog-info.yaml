@@ -2,6 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: backstage-test
+  description: A description of the Backstage application.
   annotations:
     github.com/project-slug: thaddobi/backstage-test
 spec:
