@@ -1,0 +1,1 @@
+export const DEFAULT_MAX_RESULTS_USER_ISSUES = 10;

@@ -9,6 +9,14 @@ openai:
   apiKey:
 
 backend:
+  # ...
+  # csp:
+  #   img-src:
+  #     # "'self'" and 'data' are from the backstage default but must be set since img-src is overriden
+  #     - "'self'"
+  #     - 'data:'
+  #     # Allow your Jira instance for @roadiehq/backstage-plugin-jira
+  #     - 'JIRA_URL'
   # Used for enabling authentication, secret is shared by all backend plugins
   # See https://backstage.io/docs/auth/service-to-service-auth for
   # information on the format
@@ -22,6 +30,12 @@ backend:
     # host: 127.0.0.1
   csp:
     connect-src: ["'self'", 'http:', 'https:']
+    img-src:
+    # "'self'" and 'data' are from the backstage default but must be set since img-src is overriden
+    - "'self'"
+    - 'data:'
+    # Allow your Jira instance for @roadiehq/backstage-plugin-jira
+    - 'JIRA_URL'
     # Content-Security-Policy directives follow the Helmet format: https://helmetjs.github.io/#reference
     # Default Helmet Content-Security-Policy values can be removed by setting the key to false
   cors:
@@ -47,6 +61,23 @@ integrations:
     #   token: ${GHE_TOKEN}
 
 proxy:
+  '/jira/api':
+    target: <JIRA_URL>
+    headers:
+      Authorization: OTMwMjU1NDA1NDY0OsnSSAiAvOWAWIt+L5yUHeZvEz3h #${JIRA_TOKEN}
+      Accept: 'application/json'
+      Content-Type: 'application/json'
+      X-Atlassian-Token: 'no-check'
+      # This is a workaround since Jira APIs reject browser origin requests. Any dummy string without whitespace works.
+      User-Agent: 'AnyRandomString'
+
+jira:
+  # Defaults to /jira/api and can be omitted if proxy is configured for that url
+  proxyPath: /jira/api
+  # Add it in case your JIRA instance is connected to Confluence, in order to filter those activities
+  confluenceActivityFilter: wiki@uuid
+  # Defaults to latest and can be omitted if you want to use the latest version of the api
+  apiVersion: latest
   ### Example for how to add a proxy endpoint for the frontend.
   ### A typical reason to do this is to handle HTTPS and CORS for internal services.
   # endpoints:
@@ -118,3 +149,33 @@ kubernetes:
 permission:
   # setting this to `false` will disable permissions
   enabled: true
+
+# app-config.yaml
+# proxy:
+#   '/jira/api':
+#     target: <JIRA_URL>
+#     headers:
+#       Authorization: ${JIRA_TOKEN}
+#       Accept: 'application/json'
+#       Content-Type: 'application/json'
+#       X-Atlassian-Token: 'no-check'
+#       # This is a workaround since Jira APIs reject browser origin requests. Any dummy string without whitespace works.
+#       User-Agent: 'AnyRandomString'
+
+jiraDashboard:
+  token: 'OTMwMjU1NDA1NDY0OsnSSAiAvOWAWIt+L5yUHeZvEz3h' #${JIRA_TOKEN}
+  baseUrl: 'https://reqcentral.com/projects/MPLATFORM/issues/'
+  #${JIRA_BASE_URL}
+  headers: {} # Optional
+  userEmailSuffix: '@rci.rogers.com' #${JIRA_EMAIL_SUFFIX} # Optional-e.g @rci.rogers.com
+  annotationPrefix: jira #${JIRA_ANNOTATION_PREFIX} # Optional
+
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  # ...
+  annotations:
+    jira.com/project-key: MPLATFORM # The key of the Jira project to track for this entity, or Comma-separated list of Jira project keys optionally prefixed with the instance name
+    jira.com/components: component,component,component # Jira component name separated with a comma. The Roadie Backstage Jira Plugin Jira annotation `/component` is also supported here by default
+    jira.com/filter-ids: 12345,67890 # Jira filter id separated with a comma
+    jira.com/incoming-issues-status: Incoming # The name of the status for incoming issues in Jira. Default: New

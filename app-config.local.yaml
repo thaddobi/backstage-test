@@ -1,6 +1,6 @@
 # Backstage override configuration for your local development environment
-# github app secret: 
-# github app client Id: 
+# github app secret: f6fc0629d72b14b36888f2dec9150b160d0d4cb3
+# github app client Id: Ov23lie1l3bLHUVszZCJ
 
 auth:
   environment: development
@@ -8,8 +8,8 @@ auth:
     guest: {}
     github:
       development:
-        clientId: ''
-        clientSecret: ''
+        clientId: 'Ov23lie1l3bLHUVszZCJ'
+        clientSecret: 'f6fc0629d72b14b36888f2dec9150b160d0d4cb3'
         ## uncomment if using GitHub Enterprise
         # enterpriseInstanceUrl: ${AUTH_GITHUB_ENTERPRISE_INSTANCE_URL}
         ## uncomment to set lifespan of user session
@@ -21,5 +21,54 @@ auth:
 integrations:
   github:
     - host: github.com
-      token: 
+      token: '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'
       #we can also integrate gitlab, bitbucket, jira here with host, token as above
+
+# app-config.yaml
+proxy:
+  '/jira/api':
+    target: https://reqcentral.com/projects/MPLATFORM/issues/
+    #<JIRA_URL>
+    headers:
+      Authorization: 'OTMwMjU1NDA1NDY0OsnSSAiAvOWAWIt+L5yUHeZvEz3h' # ${JIRA_TOKEN}
+      Accept: 'application/json'
+      Content-Type: 'application/json'
+      X-Atlassian-Token: 'no-check'
+      # This is a workaround since Jira APIs reject browser origin requests. Any dummy string without whitespace works.
+      User-Agent: 'AnyRandomString'
+
+jira:
+  # Defaults to /jira/api and can be omitted if proxy is configured for that url
+  proxyPath: /jira/api
+  # Add it in case your JIRA instance is connected to Confluence, in order to filter those activities
+  confluenceActivityFilter: wiki@uuid
+  # Defaults to latest and can be omitted if you want to use the latest version of the api
+  apiVersion: latest
+
+# app-config.yaml
+backend:
+  # ...
+  csp:
+    img-src:
+      # "'self'" and 'data' are from the backstage default but must be set since img-src is overriden
+      - "'self'"
+      - 'data:'
+      # Allow your Jira instance for @roadiehq/backstage-plugin-jira
+      - 'JIRA_URL'
+
+jiraDashboard:
+  token: 'OTMwMjU1NDA1NDY0OsnSSAiAvOWAWIt+L5yUHeZvEz3h' #${JIRA_TOKEN}
+  baseUrl: https://reqcentral.com/projects/MPLATFORM/issues/
+  #${JIRA_BASE_URL}
+  headers: {} # Optional
+  userEmailSuffix: '@rci.rogers.com' #${JIRA_EMAIL_SUFFIX} # Optional-e.g @rci.rogers.com
+  annotationPrefix: jira #${JIRA_ANNOTATION_PREFIX} # Optional
+
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  # ...
+  annotations:
+    # jira.com/project-key: value # Single Jira project key
+    # Or if your component is part of multiple Jira projects, you can specify multiple project keys by providing a comma-separated list
+    jira.com/project-key: MPLATFORM #,bcd,def # Comma-separated list of Jira project keys

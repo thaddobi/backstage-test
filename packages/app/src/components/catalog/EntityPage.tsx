@@ -66,6 +66,15 @@ import {
   isGithubActionsAvailable,
 } from '@backstage-community/plugin-github-actions';
 
+// packages/app/src/components/catalog/EntityPage.tsx
+import {
+  EntityJiraOverviewCard,
+  isJiraAvailable,
+} from '@roadiehq/backstage-plugin-jira';
+
+// In packages/app/src/components/catalog/EntityPage.tsx
+import { EntityJiraDashboardContent, isJiraDashboardAvailable } from '@axis-backstage/plugin-jira-dashboard';
+
 const techdocsContent = (
   <EntityTechdocsContent>
     <TechDocsAddons>
@@ -156,6 +165,13 @@ const overviewContent = (
     <Grid item xs={12} sm={6} md={4}>
       <EntitySentryCard />
     </Grid>
+    <EntitySwitch>
+      <EntitySwitch.Case if={isJiraAvailable}>
+        <Grid item md={6}>
+          <EntityJiraOverviewCard />
+        </Grid>
+      </EntitySwitch.Case>
+    </EntitySwitch>
   </Grid>
 );
 
@@ -259,6 +275,14 @@ const defaultEntityPage = (
 
     <EntityLayout.Route path="/docs" title="Docs">
       {techdocsContent}
+    </EntityLayout.Route>
+
+    <EntityLayout.Route
+      if={isJiraDashboardAvailable}
+      path="/jira-dashboard"
+      title="Jira Dashboard"
+      >
+      <EntityJiraDashboardContent />
     </EntityLayout.Route>
   </EntityLayout>
 );

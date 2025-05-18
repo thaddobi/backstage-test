@@ -1,0 +1,1 @@
+export { JiraDashboardContent } from './JiraDashboardContent';
