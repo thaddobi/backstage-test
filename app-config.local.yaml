@@ -21,7 +21,7 @@ auth:
 integrations:
   github:
     - host: github.com
-      token: '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'
+      token: 
       #we can also integrate gitlab, bitbucket, jira here with host, token as above
 
 # app-config.yaml
@@ -30,7 +30,7 @@ proxy:
     target: https://reqcentral.com/projects/MPLATFORM/issues/
     #<JIRA_URL>
     headers:
-      Authorization: 'OTMwMjU1NDA1NDY0OsnSSAiAvOWAWIt+L5yUHeZvEz3h' # ${JIRA_TOKEN}
+      Authorization: #'OTMwMjU1NDA1NDY0OsnSSAiAvOWAWIt+L5yUHeZvEz3h' # ${JIRA_TOKEN}
       Accept: 'application/json'
       Content-Type: 'application/json'
       X-Atlassian-Token: 'no-check'
@@ -57,7 +57,7 @@ backend:
       - 'JIRA_URL'
 
 jiraDashboard:
-  token: 'OTMwMjU1NDA1NDY0OsnSSAiAvOWAWIt+L5yUHeZvEz3h' #${JIRA_TOKEN}
+  token: ${JIRA_TOKEN}
   baseUrl: https://reqcentral.com/projects/MPLATFORM/issues/
   #${JIRA_BASE_URL}
   headers: {} # Optional

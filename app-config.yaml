@@ -64,7 +64,7 @@ proxy:
   '/jira/api':
     target: <JIRA_URL>
     headers:
-      Authorization: OTMwMjU1NDA1NDY0OsnSSAiAvOWAWIt+L5yUHeZvEz3h #${JIRA_TOKEN}
+      Authorization: #OTMwMjU1NDA1NDY0OsnSSAiAvOWAWIt+L5yUHeZvEz3h #${JIRA_TOKEN}
       Accept: 'application/json'
       Content-Type: 'application/json'
       X-Atlassian-Token: 'no-check'
@@ -163,7 +163,7 @@ permission:
 #       User-Agent: 'AnyRandomString'
 
 jiraDashboard:
-  token: 'OTMwMjU1NDA1NDY0OsnSSAiAvOWAWIt+L5yUHeZvEz3h' #${JIRA_TOKEN}
+  token: #'OTMwMjU1NDA1NDY0OsnSSAiAvOWAWIt+L5yUHeZvEz3h' #${JIRA_TOKEN}
   baseUrl: 'https://reqcentral.com/projects/MPLATFORM/issues/'
   #${JIRA_BASE_URL}
   headers: {} # Optional
