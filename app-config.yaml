@@ -163,7 +163,7 @@ permission:
 #       User-Agent: 'AnyRandomString'
 
 jiraDashboard:
-  token: #'OTMwMjU1NDA1NDY0OsnSSAiAvOWAWIt+L5yUHeZvEz3h' #${JIRA_TOKEN}
+  token: ${JIRA_TOKEN}
   baseUrl: 'https://reqcentral.com/projects/MPLATFORM/issues/'
   #${JIRA_BASE_URL}
   headers: {} # Optional

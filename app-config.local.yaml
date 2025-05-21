@@ -8,8 +8,8 @@ auth:
     guest: {}
     github:
       development:
-        clientId: 'Ov23lie1l3bLHUVszZCJ'
-        clientSecret: 'f6fc0629d72b14b36888f2dec9150b160d0d4cb3'
+        clientId: 
+        clientSecret: 
         ## uncomment if using GitHub Enterprise
         # enterpriseInstanceUrl: ${AUTH_GITHUB_ENTERPRISE_INSTANCE_URL}
         ## uncomment to set lifespan of user session
