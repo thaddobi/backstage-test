@@ -9,8 +9,8 @@ metadata:
   #   github.com/project-slug: backstage/backstage
   #   backstage.io/techdocs-ref: dir:.
   annotations:
-    sentry.io/project-slug: YOUR_PROJECT_SLUG
+    jenkins.io/job-full-name: 'audio_nextjs/staging'
 spec:
-  type: website
+  type: service
   owner: john@example.com
   lifecycle: experimental
