@@ -25,6 +25,8 @@ import { apis } from './apis';
 import { entityPage } from './components/catalog/EntityPage';
 import { searchPage } from './components/search/SearchPage';
 import { Root } from './components/Root';
+import { SoundcheckRoutingPage } from '@spotify/backstage-plugin-soundcheck';
+import { GroupSoundcheckContent } from '@spotify/backstage-plugin-soundcheck';
 
 import {
   AlertDisplay,
@@ -37,6 +39,9 @@ import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { RequirePermission } from '@backstage/plugin-permission-react';
 import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/alpha';
 import { githubAuthApiRef } from '@backstage/core-plugin-api';
+import { HomepageCompositionRoot, VisitListener } from '@backstage/plugin-home';
+import { AppProvider } from '@shopify/polaris';
+import translations from '@shopify/polaris/locales/en.json';
 // import {ChatGPTFrontendPage} from '@enfuse/chatgpt-plugin-frontend';
 // import { sentryPlugin } from '@backstage-community/plugin-sentry';
 
@@ -108,16 +113,43 @@ const routes = (
     </Route>
     <Route path="/settings" element={<UserSettingsPage />} />
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
+    <Route
+      path='/soundcheck'
+      element={<SoundcheckRoutingPage title='My Optional Title' />}
+    />
     {/* <Route path="/chatgpt-plugin-frontend" element={<ChatGPTFrontendPage />} /> */}
   </FlatRoutes>
 );
 
+// const groupPage = (
+//   <EntityLayout>
+//     {/* existing tabs... */}
+
+//     <EntityLayout.Route path="/soundcheck" title="Soundcheck">
+//       <GroupSoundcheckContent />
+//     </EntityLayout.Route>
+//   </EntityLayout>
+// );
+
+// export default app.createRoot(
+//   <>
+//     <AlertDisplay />
+//     <OAuthRequestDialog />
+//     <AppRouter>
+//       <Root>{routes}</Root>
+//     </AppRouter>
+//   </>,
+// );
+
 export default app.createRoot(
   <>
-    <AlertDisplay />
-    <OAuthRequestDialog />
-    <AppRouter>
-      <Root>{routes}</Root>
-    </AppRouter>
+   <AppProvider i18n={translations}>
+      <AlertDisplay transientTimeoutMs={2500} />
+      <OAuthRequestDialog />
+      <AppRouter>
+        <VisitListener />
+        <Root>{routes}</Root>
+      </AppRouter>
+    </AppProvider>
   </>,
 );

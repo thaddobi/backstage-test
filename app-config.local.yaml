@@ -1,6 +1,9 @@
 # Backstage override configuration for your local development environment
 # github app secret: f6fc0629d72b14b36888f2dec9150b160d0d4cb3
 # github app client Id: Ov23lie1l3bLHUVszZCJ
+app:
+  title: Scaffolded Backstage App
+  baseUrl: http://localhost:3000
 
 auth:
   environment: development
@@ -8,8 +11,8 @@ auth:
     guest: {}
     github:
       development:
-        clientId: 
-        clientSecret: 
+        clientId: 'Ov23lie1l3bLHUVszZCJ'
+        clientSecret: 'f6fc0629d72b14b36888f2dec9150b160d0d4cb3'
         ## uncomment if using GitHub Enterprise
         # enterpriseInstanceUrl: ${AUTH_GITHUB_ENTERPRISE_INSTANCE_URL}
         ## uncomment to set lifespan of user session
@@ -21,7 +24,7 @@ auth:
 integrations:
   github:
     - host: github.com
-      token: 
+      token: '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' #'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'
       #we can also integrate gitlab, bitbucket, jira here with host, token as above
 
 # app-config.yaml
@@ -30,7 +33,7 @@ proxy:
     target: https://reqcentral.com/projects/MPLATFORM/issues/
     #<JIRA_URL>
     headers:
-      Authorization: #'OTMwMjU1NDA1NDY0OsnSSAiAvOWAWIt+L5yUHeZvEz3h' # ${JIRA_TOKEN}
+      Authorization: 'OTMwMjU1NDA1NDY0OsnSSAiAvOWAWIt+L5yUHeZvEz3h' # ${JIRA_TOKEN}
       Accept: 'application/json'
       Content-Type: 'application/json'
       X-Atlassian-Token: 'no-check'
@@ -47,6 +50,9 @@ jira:
 
 # app-config.yaml
 backend:
+  baseUrl: http://localhost:7007
+  listen:
+    port: 7007
   # ...
   csp:
     img-src:
@@ -55,9 +61,19 @@ backend:
       - 'data:'
       # Allow your Jira instance for @roadiehq/backstage-plugin-jira
       - 'JIRA_URL'
+  database:
+    # client: better-sqlite3
+    # connection: ':memory:'
+    # config options: https://node-postgres.com/apis/client
+    client: pg
+    connection:
+      host: localhost
+      port: 5433
+      user: postgres
+      password: postgres
 
 jiraDashboard:
-  token: ${JIRA_TOKEN}
+  token: 'OTMwMjU1NDA1NDY0OsnSSAiAvOWAWIt+L5yUHeZvEz3h' #${JIRA_TOKEN}
   baseUrl: https://reqcentral.com/projects/MPLATFORM/issues/
   #${JIRA_BASE_URL}
   headers: {} # Optional
@@ -72,3 +88,14 @@ metadata:
     # jira.com/project-key: value # Single Jira project key
     # Or if your component is part of multiple Jira projects, you can specify multiple project keys by providing a comma-separated list
     jira.com/project-key: MPLATFORM #,bcd,def # Comma-separated list of Jira project keys
+
+soundcheck:
+  collectors:
+    jira:
+      baseUrl: https://jira-instance.atlassian.net
+      username: thaddeus.obi@rci.rogers.com # This could be your email or username that you use to log in to jira
+      apiToken: OTMwMjU1NDA1NDY0OsnSSAiAvOWAWIt+L5yUHeZvEz3h # Generate new token https://id.atlassian.com/manage-profile/security/api-tokens
+  addStartingConfigurations:
+    collectors: true
+    checks: true
+    tracks: true

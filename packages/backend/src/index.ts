@@ -10,6 +10,10 @@ import { createBackend } from '@backstage/backend-defaults';
 
 const backend = createBackend();
 
+// backend.add(import('@backstage/plugin-app-backend/alpha'));
+backend.add(import('@spotify/backstage-plugin-soundcheck-backend'));
+
+
 backend.add(import('@backstage/plugin-app-backend'));
 backend.add(import('@backstage/plugin-proxy-backend'));
 backend.add(import('@backstage/plugin-scaffolder-backend'));

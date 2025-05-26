@@ -75,6 +75,11 @@ import {
 // In packages/app/src/components/catalog/EntityPage.tsx
 import { EntityJiraDashboardContent, isJiraDashboardAvailable } from '@axis-backstage/plugin-jira-dashboard';
 
+import {
+  EntitySoundcheckContent,
+  EntitySoundcheckCard,
+} from '@spotify/backstage-plugin-soundcheck';
+
 const techdocsContent = (
   <EntityTechdocsContent>
     <TechDocsAddons>
@@ -165,6 +170,9 @@ const overviewContent = (
     <Grid item xs={12} sm={6} md={4}>
       <EntitySentryCard />
     </Grid>
+    <Grid item md={6} xs={12}>
+      <EntitySoundcheckCard />
+    </Grid>
     <EntitySwitch>
       <EntitySwitch.Case if={isJiraAvailable}>
         <Grid item md={6}>
@@ -221,6 +229,10 @@ const serviceEntityPage = (
 
     <EntityLayout.Route path="/sentry" title="Sentry">
       <EntitySentryContent />
+    </EntityLayout.Route>
+
+    <EntityLayout.Route path='/soundcheck' title='Soundcheck'>
+      <EntitySoundcheckContent />
     </EntityLayout.Route>
   </EntityLayout>
 );

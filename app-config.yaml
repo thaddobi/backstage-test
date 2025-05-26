@@ -45,16 +45,21 @@ backend:
   # This is for local development only, it is not recommended to use this in production
   # The production database configuration is stored in app-config.production.yaml
   database:
-    client: better-sqlite3
-    connection: ':memory:'
-  # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
-
+    # client: better-sqlite3
+    # connection: ':memory:'
+    # config options: https://node-postgres.com/apis/client
+    client: pg
+    connection:
+      host: localhost
+      port: 5433
+      user: postgres
+      password: postgres
 integrations:
   github:
     - host: github.com
       # This is a Personal Access Token or PAT from GitHub. You can find out how to generate this token, and more information
       # about setting up the GitHub integration here: https://backstage.io/docs/integrations/github/locations#configuration
-      token:
+      token: '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'
     ### Example for how to add your GitHub Enterprise instance using the API:
     # - host: ghe.example.net
     #   apiBaseUrl: https://ghe.example.net/api/v3
@@ -64,7 +69,7 @@ proxy:
   '/jira/api':
     target: <JIRA_URL>
     headers:
-      Authorization: #OTMwMjU1NDA1NDY0OsnSSAiAvOWAWIt+L5yUHeZvEz3h #${JIRA_TOKEN}
+      Authorization: OTMwMjU1NDA1NDY0OsnSSAiAvOWAWIt+L5yUHeZvEz3h #${JIRA_TOKEN}
       Accept: 'application/json'
       Content-Type: 'application/json'
       X-Atlassian-Token: 'no-check'
@@ -163,7 +168,7 @@ permission:
 #       User-Agent: 'AnyRandomString'
 
 jiraDashboard:
-  token: ${JIRA_TOKEN}
+  token: 'OTMwMjU1NDA1NDY0OsnSSAiAvOWAWIt+L5yUHeZvEz3h' #${JIRA_TOKEN}
   baseUrl: 'https://reqcentral.com/projects/MPLATFORM/issues/'
   #${JIRA_BASE_URL}
   headers: {} # Optional
