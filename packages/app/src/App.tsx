@@ -34,6 +34,7 @@ import {
   SignInPage,
 } from '@backstage/core-components';
 import { createApp } from '@backstage/app-defaults';
+// import { FlatRoutes } from '@backstage/core-app-api';
 import { AppRouter, FlatRoutes } from '@backstage/core-app-api';
 import { CatalogGraphPage } from '@backstage/plugin-catalog-graph';
 import { RequirePermission } from '@backstage/plugin-permission-react';
@@ -141,15 +142,27 @@ const routes = (
 //   </>,
 // );
 
+
+// const AppProvider = app.getProvider();
+// const AppRouter = app.getRouter();
+
+// const App = () => (
+//   <AppProvider>
+//     <AlertDisplay />
+//     <OAuthRequestDialog />
+//     <AppRouter>
+//       <Root>{routes}</Root>
+//     </AppRouter>
+//   </AppProvider>
+// );
+
 export default app.createRoot(
-  <>
-   <AppProvider i18n={translations}>
+    <AppProvider i18n={translations}>
       <AlertDisplay transientTimeoutMs={2500} />
       <OAuthRequestDialog />
       <AppRouter>
-        <VisitListener />
-        <Root>{routes}</Root>
+          <VisitListener />
+          <Root>{routes}</Root>
       </AppRouter>
     </AppProvider>
-  </>,
 );
